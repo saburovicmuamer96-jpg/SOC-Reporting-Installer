@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Reporting System - Installation Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        @page {
+            size: A4;
+            margin: 20mm 18mm;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #fff;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 24px 32px;
+        }
+
+        /* Header */
+        .doc-header {
+            border-bottom: 3px solid #0a0e17;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .doc-header h1 {
+            font-size: 22pt;
+            font-weight: 700;
+            color: #0a0e17;
+            margin-bottom: 4px;
+        }
+        .doc-header .subtitle {
+            font-size: 12pt;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        .doc-header .meta {
+            margin-top: 12px;
+            font-size: 9pt;
+            color: #718096;
+        }
+        .doc-header .meta span {
+            margin-right: 20px;
+        }
+
+        /* Section */
+        h2 {
+            font-size: 15pt;
+            font-weight: 700;
+            color: #0a0e17;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            page-break-after: avoid;
+        }
+        h3 {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            page-break-after: avoid;
+        }
+        h4 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #4a5568;
+            margin-top: 14px;
+            margin-bottom: 6px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        /* Lists */
+        ol, ul {
+            margin-left: 24px;
+            margin-bottom: 12px;
+        }
+        li {
+            margin-bottom: 6px;
+            color: #2d3748;
+        }
+        li strong {
+            color: #1a1a2e;
+        }
+
+        /* Code */
+        code {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 9.5pt;
+            background: #f0f4f8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #0066cc;
+        }
+        pre {
+            background: #0a0e17;
+            color: #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 9pt;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin-bottom: 14px;
+            page-break-inside: avoid;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* Boxes */
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 14px;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+        .warning-box {
+            background: #fffbeb;
+            border-left: 4px solid #d69e2e;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 14px;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+        .danger-box {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 14px;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+        .success-box {
+            background: #f0fff4;
+            border-left: 4px solid #38a169;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 14px;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+        th {
+            background: #0a0e17;
+            color: #e2e8f0;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #2d3748;
+        }
+        tr:nth-child(even) td {
+            background: #f7fafc;
+        }
+
+        /* TOC */
+        .toc {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #0a0e17;
+        }
+        .toc ol {
+            margin-left: 20px;
+        }
+        .toc li {
+            margin-bottom: 4px;
+            color: #4a5568;
+        }
+
+        /* Step numbers */
+        .step-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            background: #0a0e17;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 12pt;
+            font-weight: 700;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Screenshot placeholder */
+        .screenshot {
+            border: 2px dashed #cbd5e0;
+            background: #f7fafc;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 2px solid #e2e8f0;
+            font-size: 9pt;
+            color: #a0aec0;
+            text-align: center;
+        }
+
+        /* Page breaks */
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            body { padding: 0; max-width: none; }
+            .no-print { display: none; }
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #0a0e17;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 11pt;
+            cursor: pointer;
+            font-family: inherit;
+            z-index: 100;
+        }
+        .print-btn:hover { background: #2d3748; }
+    </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+
+<!-- HEADER -->
+<div class="doc-header">
+    <h1>SOC Reporting System</h1>
+    <div class="subtitle">Installation &amp; Setup Guide for Windows</div>
+    <div class="meta">
+        <span>Version 1.0.0</span>
+        <span>Classification: Internal Use Only</span>
+        <span>NIST Compliant</span>
+    </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+        <li>System Requirements</li>
+        <li>Automated Installation (Recommended)</li>
+        <li>Manual Installation</li>
+        <li>Database Setup</li>
+        <li>Application Configuration</li>
+        <li>First Login &amp; Initial Setup</li>
+        <li>Network Access via SSH/Ethernet</li>
+        <li>Daily Operations</li>
+        <li>Troubleshooting</li>
+        <li>Security Considerations</li>
+    </ol>
+</div>
+
+<!-- SECTION 1 -->
+<h2>1. System Requirements</h2>
+
+<table>
+    <tr><th>Component</th><th>Requirement</th></tr>
+    <tr><td>Operating System</td><td>Windows 10/11 (64-bit) or Windows Server 2019+</td></tr>
+    <tr><td>RAM</td><td>Minimum 4 GB (8 GB recommended)</td></tr>
+    <tr><td>Disk Space</td><td>Minimum 2 GB free space</td></tr>
+    <tr><td>Network</td><td>Ethernet interface for direct connection</td></tr>
+    <tr><td>Browser</td><td>Chrome, Firefox, or Edge (latest version)</td></tr>
+    <tr><td>Software</td><td>PowerShell 5.1+ (pre-installed on Windows 10/11)</td></tr>
+</table>
+
+<div class="info-box">
+    <strong>What gets installed:</strong> XAMPP (Apache 2.4 + PHP 8.2 + MariaDB 10.4) - a single portable package that includes everything the application needs to run.
+</div>
+
+<!-- SECTION 2 -->
+<h2>2. Automated Installation (Recommended)</h2>
+
+<p>The installer package includes scripts that automate the entire setup process.</p>
+
+<h3><span class="step-number">1</span> Extract the Installer</h3>
+<p>Extract the <code>SOC-Reporting-Installer.zip</code> file to any location on the Windows machine (e.g., the Desktop).</p>
+
+<h3><span class="step-number">2</span> Run the Installer</h3>
+<ol>
+    <li>Open the extracted <code>SOC-Reporting-Installer</code> folder</li>
+    <li>Right-click <code>INSTALL.bat</code></li>
+    <li>Select <strong>"Run as administrator"</strong></li>
+    <li>The installer will:
+        <ul>
+            <li>Download XAMPP (Apache + PHP + MariaDB) automatically</li>
+            <li>Install it to <code>C:\xampp</code></li>
+            <li>Configure PHP extensions and timezone</li>
+            <li>Create the database user and import all 5 databases</li>
+            <li>Deploy the application to <code>C:\xampp\htdocs\SOC-Reporting</code></li>
+            <li>Start Apache and MariaDB services</li>
+        </ul>
+    </li>
+    <li>Wait for the process to complete (5-10 minutes depending on internet speed)</li>
+</ol>
+
+<div class="warning-box">
+    <strong>Firewall:</strong> Windows may ask to allow Apache and MariaDB through the firewall. Click <strong>"Allow access"</strong> for both - these are required for the application to function.
+</div>
+
+<h3><span class="step-number">3</span> Verify the Installation</h3>
+<ol>
+    <li>The installer will open <code>http://localhost/SOC-Reporting/setup.php</code> in your browser</li>
+    <li>All items should show green checkmarks</li>
+    <li>If everything passes, click <strong>"Open SOC Reporting System"</strong></li>
+</ol>
+
+<h3><span class="step-number">4</span> First Login</h3>
+<table>
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code>http://localhost/SOC-Reporting/</code></td></tr>
+    <tr><td>Username</td><td><code>admin</code></td></tr>
+    <tr><td>Password</td><td><code>Admin@SOC2024</code></td></tr>
+</table>
+
+<div class="danger-box">
+    <strong>SECURITY:</strong> Change the admin password immediately after first login via Admin Panel &gt; Users.
+</div>
+
+<div class="danger-box">
+    <strong>IMPORTANT:</strong> Delete the file <code>C:\xampp\htdocs\SOC-Reporting\setup.php</code> after successful setup to prevent unauthorized database reinitialization.
+</div>
+
+<!-- SECTION 3 -->
+<h2 class="page-break">3. Manual Installation</h2>
+
+<p>If the automated installer fails, follow these steps to install manually.</p>
+
+<h3>3.1 Install XAMPP</h3>
+<ol>
+    <li>Download XAMPP from <code>https://www.apachefriends.org/download.html</code></li>
+    <li>Choose the <strong>Windows</strong> version with <strong>PHP 8.2.x</strong></li>
+    <li>Run the installer and install to <code>C:\xampp</code></li>
+    <li>During installation, select at minimum: <strong>Apache</strong>, <strong>MySQL</strong>, <strong>PHP</strong></li>
+</ol>
+
+<h3>3.2 Configure PHP</h3>
+<ol>
+    <li>Open <code>C:\xampp\php\php.ini</code> in a text editor (e.g., Notepad)</li>
+    <li>Find and uncomment (remove the <code>;</code>) these lines:
+<pre><code>extension=pdo_mysql
+extension=mbstring
+extension=openssl
+extension=gd</code></pre>
+    </li>
+    <li>Find the <code>date.timezone</code> setting and set it:
+<pre><code>date.timezone = Europe/Vienna</code></pre>
+    </li>
+    <li>Save the file</li>
+</ol>
+
+<h3>3.3 Deploy Application Files</h3>
+<ol>
+    <li>Copy the <code>SOC-Reporting</code> folder from the installer package</li>
+    <li>Paste it into <code>C:\xampp\htdocs\</code></li>
+    <li>The final path should be <code>C:\xampp\htdocs\SOC-Reporting\</code></li>
+    <li>Verify that <code>C:\xampp\htdocs\SOC-Reporting\index.php</code> exists</li>
+</ol>
+
+<h3>3.4 Start Services</h3>
+<ol>
+    <li>Open <code>C:\xampp\xampp-control.exe</code> (XAMPP Control Panel)</li>
+    <li>Click <strong>"Start"</strong> next to <strong>Apache</strong></li>
+    <li>Click <strong>"Start"</strong> next to <strong>MySQL</strong> (this is actually MariaDB)</li>
+    <li>Both should turn green when running</li>
+</ol>
+
+<div class="info-box">
+    <strong>Tip:</strong> To have XAMPP start automatically with Windows, click "Config" in the XAMPP Control Panel and check "Autostart of modules": Apache and MySQL.
+</div>
+
+<h3>3.5 Create Database User</h3>
+<ol>
+    <li>Open a command prompt (CMD)</li>
+    <li>Navigate to MariaDB:
+<pre><code>cd C:\xampp\mysql\bin</code></pre>
+    </li>
+    <li>Connect to MariaDB:
+<pre><code>mysql -u root</code></pre>
+    </li>
+    <li>Run these SQL commands:
+<pre><code>CREATE USER 'soc_admin'@'localhost' IDENTIFIED BY 'SOC_Local_2024!';
+GRANT ALL PRIVILEGES ON soc_system.* TO 'soc_admin'@'localhost';
+GRANT ALL PRIVILEGES ON soc_machine_1.* TO 'soc_admin'@'localhost';
+GRANT ALL PRIVILEGES ON soc_machine_2.* TO 'soc_admin'@'localhost';
+GRANT ALL PRIVILEGES ON soc_machine_3.* TO 'soc_admin'@'localhost';
+GRANT ALL PRIVILEGES ON soc_machine_4.* TO 'soc_admin'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;</code></pre>
+    </li>
+</ol>
+
+<h3>3.6 Import Database Schemas</h3>
+<p>Option A: Use the built-in setup page:</p>
+<ol>
+    <li>Open <code>http://localhost/SOC-Reporting/setup.php</code> in your browser</li>
+    <li>The setup script will create all databases and tables automatically</li>
+</ol>
+
+<p>Option B: Import manually via command line:</p>
+<pre><code>cd C:\xampp\mysql\bin
+mysql -u root &lt; C:\xampp\htdocs\SOC-Reporting\sql\system.sql</code></pre>
+
+<p>For each machine database (replace N with 1, 2, 3, 4):</p>
+<pre><code>mysql -u root -e "CREATE DATABASE IF NOT EXISTS soc_machine_N"
+REM Then copy machine_template.sql, replace {N} with the number, and import</code></pre>
+
+<div class="success-box">
+    <strong>Easier option:</strong> Just visit <code>http://localhost/SOC-Reporting/setup.php</code> in your browser - it handles all database creation automatically.
+</div>
+
+<!-- SECTION 4 -->
+<h2 class="page-break">4. Database Architecture</h2>
+
+<p>The system uses 5 separate databases for security isolation:</p>
+
+<table>
+    <tr><th>Database</th><th>Purpose</th></tr>
+    <tr><td><code>soc_system</code></td><td>Users, sessions, audit logs, machine config, form fields, instructions</td></tr>
+    <tr><td><code>soc_machine_1</code></td><td>Reports and data for Machine 1</td></tr>
+    <tr><td><code>soc_machine_2</code></td><td>Reports and data for Machine 2</td></tr>
+    <tr><td><code>soc_machine_3</code></td><td>Reports and data for Machine 3</td></tr>
+    <tr><td><code>soc_machine_4</code></td><td>Reports and data for Machine 4</td></tr>
+</table>
+
+<h3>Key Tables</h3>
+<table>
+    <tr><th>Table</th><th>Database</th><th>Description</th></tr>
+    <tr><td><code>users</code></td><td>soc_system</td><td>User accounts with bcrypt password hashes</td></tr>
+    <tr><td><code>machines</code></td><td>soc_system</td><td>Machine names and configuration (4 slots)</td></tr>
+    <tr><td><code>form_fields</code></td><td>soc_system</td><td>Dynamic form field definitions per machine</td></tr>
+    <tr><td><code>reports</code></td><td>soc_machine_*</td><td>Event reports with timestamps and reaction times</td></tr>
+    <tr><td><code>report_data</code></td><td>soc_machine_*</td><td>Dynamic field values for each report</td></tr>
+    <tr><td><code>deleted_reports</code></td><td>soc_machine_*</td><td>Archived deleted reports (soft delete)</td></tr>
+    <tr><td><code>audit_log</code></td><td>soc_system</td><td>All admin and user actions logged</td></tr>
+</table>
+
+<!-- SECTION 5 -->
+<h2>5. Application Configuration</h2>
+
+<h3>5.1 Database Credentials</h3>
+<p>File: <code>C:\xampp\htdocs\SOC-Reporting\config\database.php</code></p>
+<pre><code>define('DB_HOST', 'localhost');
+define('DB_PORT', '3306');
+define('DB_USER', 'soc_admin');
+define('DB_PASS', 'SOC_Local_2024!');</code></pre>
+
+<div class="warning-box">
+    <strong>Change the database password</strong> for production use. Update both the MariaDB user password and the <code>database.php</code> config file.
+</div>
+
+<h3>5.2 Application Settings</h3>
+<p>File: <code>C:\xampp\htdocs\SOC-Reporting\config\app.php</code></p>
+<table>
+    <tr><th>Setting</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>SESSION_LIFETIME</code></td><td>3600 (1 hour)</td><td>User session timeout</td></tr>
+    <tr><td><code>ADMIN_SESSION_LIFETIME</code></td><td>1800 (30 min)</td><td>Admin panel session timeout</td></tr>
+    <tr><td><code>AUTH_MAX_ATTEMPTS</code></td><td>5</td><td>Login attempts before lockout</td></tr>
+    <tr><td><code>AUTH_LOCKOUT_TIME</code></td><td>900 (15 min)</td><td>Lockout duration</td></tr>
+    <tr><td><code>REPORTS_PER_PAGE</code></td><td>25</td><td>Pagination size</td></tr>
+    <tr><td><code>MACHINE_SLOTS</code></td><td>4</td><td>Number of machines</td></tr>
+</table>
+
+<h3>5.3 Timezone</h3>
+<p>The timezone is set in <code>config/app.php</code>:</p>
+<pre><code>date_default_timezone_set('Europe/Vienna');</code></pre>
+<p>Change this to match your server's timezone if different. This must match the MariaDB timezone to prevent session expiry issues.</p>
+
+<!-- SECTION 6 -->
+<h2 class="page-break">6. First Login &amp; Initial Setup</h2>
+
+<h3>6.1 Login</h3>
+<ol>
+    <li>Open <code>http://localhost/SOC-Reporting/</code> in your browser</li>
+    <li>Login with username <code>admin</code> and password <code>Admin@SOC2024</code></li>
+</ol>
+
+<h3>6.2 Admin Panel Setup (Required)</h3>
+<ol>
+    <li>Click <strong>"Admin Panel"</strong> in the sidebar (bottom)</li>
+    <li>Enter the admin credentials again (admin authentication gate)</li>
+    <li>Complete these initial configuration steps:</li>
+</ol>
+
+<h4>a) Change Admin Password</h4>
+<ol>
+    <li>Go to Admin Panel &gt; <strong>Users</strong></li>
+    <li>Edit the <code>admin</code> user</li>
+    <li>Set a strong new password (NIST: minimum 8 characters)</li>
+</ol>
+
+<h4>b) Configure Machine Names</h4>
+<ol>
+    <li>Go to Admin Panel &gt; <strong>Machines</strong></li>
+    <li>Rename each machine slot to match your actual machines</li>
+    <li>Optionally add descriptions</li>
+</ol>
+
+<h4>c) Build Report Forms</h4>
+<ol>
+    <li>Go to Admin Panel &gt; <strong>Form Builder</strong></li>
+    <li>Select a machine</li>
+    <li>Add fields: text, textarea, dropdown, checkbox, number</li>
+    <li>Set labels in English and German</li>
+    <li>Drag to reorder fields</li>
+    <li>Save the form configuration</li>
+</ol>
+
+<h4>d) Configure Dropdown Options</h4>
+<ol>
+    <li>Go to Admin Panel &gt; <strong>Dropdown Data</strong></li>
+    <li>Select dropdown fields and add their options</li>
+    <li>Provide bilingual labels (EN/DE)</li>
+</ol>
+
+<h4>e) Create User Accounts</h4>
+<ol>
+    <li>Go to Admin Panel &gt; <strong>Users</strong></li>
+    <li>Create accounts for SOC analysts</li>
+    <li>Assign role: <code>user</code> (standard) or <code>admin</code></li>
+    <li>No self-registration - all accounts are admin-created</li>
+</ol>
+
+<!-- SECTION 7 -->
+<h2>7. Network Access via SSH/Ethernet</h2>
+
+<p>The system is designed to run on a standalone Windows machine accessed via direct Ethernet connection and SSH.</p>
+
+<h3>7.1 Network Configuration</h3>
+<ol>
+    <li>Connect an Ethernet cable directly between the server and client</li>
+    <li>On the server (Windows), set a static IP:
+        <ul>
+            <li>Go to Network Settings &gt; Ethernet adapter &gt; Properties</li>
+            <li>Set IP: <code>192.168.1.1</code>, Subnet: <code>255.255.255.0</code></li>
+        </ul>
+    </li>
+    <li>On the client, set a compatible static IP:
+        <ul>
+            <li>IP: <code>192.168.1.2</code>, Subnet: <code>255.255.255.0</code></li>
+        </ul>
+    </li>
+</ol>
+
+<h3>7.2 Configure Apache for Remote Access</h3>
+<ol>
+    <li>Open <code>C:\xampp\apache\conf\httpd.conf</code></li>
+    <li>Find <code>Listen 80</code> - keep as is (listens on all interfaces)</li>
+    <li>In Windows Firewall, allow incoming connections on port 80</li>
+</ol>
+
+<h3>7.3 Access from Client</h3>
+<p>On the client machine, open a browser and navigate to:</p>
+<pre><code>http://192.168.1.1/SOC-Reporting/</code></pre>
+
+<h3>7.4 SSH Access (Optional)</h3>
+<p>To enable SSH on Windows for remote management:</p>
+<ol>
+    <li>Open Windows Settings &gt; Apps &gt; Optional Features</li>
+    <li>Add <strong>"OpenSSH Server"</strong></li>
+    <li>Start the service: <code>net start sshd</code></li>
+    <li>From the client: <code>ssh user@192.168.1.1</code></li>
+</ol>
+
+<!-- SECTION 8 -->
+<h2 class="page-break">8. Daily Operations</h2>
+
+<h3>8.1 Starting the Server</h3>
+<p>Double-click <code>START-SERVER.bat</code> in the installer folder, or:</p>
+<ol>
+    <li>Open <code>C:\xampp\xampp-control.exe</code></li>
+    <li>Start <strong>Apache</strong> and <strong>MySQL</strong></li>
+</ol>
+
+<h3>8.2 Stopping the Server</h3>
+<p>Double-click <code>STOP-SERVER.bat</code> in the installer folder, or:</p>
+<ol>
+    <li>Open XAMPP Control Panel</li>
+    <li>Stop <strong>Apache</strong> and <strong>MySQL</strong></li>
+</ol>
+
+<h3>8.3 Application Features</h3>
+<table>
+    <tr><th>Feature</th><th>Description</th></tr>
+    <tr><td><strong>Dashboard</strong></td><td>Overview of all 4 machines, report counts, avg reaction times</td></tr>
+    <tr><td><strong>Report Creation</strong></td><td>Dynamic forms with mandatory incident time, auto-calculated reaction time</td></tr>
+    <tr><td><strong>Report Filtering</strong></td><td>Filter by date range, status, event ID, username with advanced time picker</td></tr>
+    <tr><td><strong>Charts Dashboard</strong></td><td>Splunk-style analytics: 10 chart types, KPI panels, multi-machine overlays</td></tr>
+    <tr><td><strong>PDF Export</strong></td><td>Export individual reports as formatted PDF documents</td></tr>
+    <tr><td><strong>Bilingual</strong></td><td>Full English/German support, switchable via EN/DE toggle</td></tr>
+    <tr><td><strong>Soft Delete</strong></td><td>Reports are archived, not permanently deleted. Restorable by admin</td></tr>
+    <tr><td><strong>Audit Logging</strong></td><td>All actions logged: logins, report creation, deletions, admin changes</td></tr>
+</table>
+
+<h3>8.4 Backup</h3>
+<p>Regular database backups are essential. Use this command in CMD:</p>
+<pre><code>cd C:\xampp\mysql\bin
+mysqldump -u root --databases soc_system soc_machine_1 soc_machine_2 soc_machine_3 soc_machine_4 > C:\backups\soc_backup_%date:~-4%%date:~3,2%%date:~0,2%.sql</code></pre>
+
+<div class="info-box">
+    <strong>Recommendation:</strong> Schedule daily backups using Windows Task Scheduler. Create a batch file with the command above and schedule it to run nightly.
+</div>
+
+<!-- SECTION 9 -->
+<h2>9. Troubleshooting</h2>
+
+<h3>9.1 Apache Won't Start</h3>
+<table>
+    <tr><th>Problem</th><th>Solution</th></tr>
+    <tr><td>Port 80 in use</td><td>Check with <code>netstat -aon | findstr :80</code>. Stop IIS or Skype if conflicting. Or change Apache port in <code>httpd.conf</code></td></tr>
+    <tr><td>Missing VCRUNTIME</td><td>Install Visual C++ Redistributable from Microsoft (vc_redist.x64.exe)</td></tr>
+    <tr><td>Firewall blocking</td><td>Allow <code>httpd.exe</code> through Windows Firewall</td></tr>
+</table>
+
+<h3>9.2 Database Connection Error</h3>
+<table>
+    <tr><th>Problem</th><th>Solution</th></tr>
+    <tr><td>MariaDB not running</td><td>Start MySQL via XAMPP Control Panel</td></tr>
+    <tr><td>Wrong credentials</td><td>Verify <code>config/database.php</code> matches MariaDB user</td></tr>
+    <tr><td>Databases don't exist</td><td>Run <code>setup.php</code> again or import SQL manually</td></tr>
+</table>
+
+<h3>9.3 Admin Login Issues</h3>
+<table>
+    <tr><th>Problem</th><th>Solution</th></tr>
+    <tr><td>Session expires immediately</td><td>Ensure PHP timezone in <code>php.ini</code> matches <code>config/app.php</code></td></tr>
+    <tr><td>Account locked out</td><td>Wait 15 minutes, or clear via DB: <code>UPDATE users SET failed_attempts=0, locked_until=NULL WHERE username='admin'</code></td></tr>
+    <tr><td>Forgot password</td><td>Generate new hash: <code>php -r "echo password_hash('NewPass123', PASSWORD_BCRYPT, ['cost'=>12]);"</code> and update in DB</td></tr>
+</table>
+
+<h3>9.4 Pages Not Loading</h3>
+<ul>
+    <li>Ensure the URL is <code>http://localhost/SOC-Reporting/</code> (with trailing slash)</li>
+    <li>Check that <code>mod_rewrite</code> is enabled in Apache (uncomment in <code>httpd.conf</code>)</li>
+    <li>Check PHP error log: <code>C:\xampp\php\logs\php_error_log</code></li>
+    <li>Check Apache error log: <code>C:\xampp\apache\logs\error.log</code></li>
+</ul>
+
+<!-- SECTION 10 -->
+<h2 class="page-break">10. Security Considerations (NIST Compliance)</h2>
+
+<p>The SOC Reporting System implements the following NIST-compliant security measures:</p>
+
+<table>
+    <tr><th>Control</th><th>Implementation</th></tr>
+    <tr><td>Password Hashing</td><td>bcrypt with cost factor 12</td></tr>
+    <tr><td>Session Management</td><td>Cryptographic tokens, HTTP-only cookies, strict SameSite</td></tr>
+    <tr><td>CSRF Protection</td><td>Per-session CSRF tokens on all forms</td></tr>
+    <tr><td>SQL Injection</td><td>PDO prepared statements everywhere</td></tr>
+    <tr><td>XSS Prevention</td><td>htmlspecialchars() on all user output</td></tr>
+    <tr><td>Access Control</td><td>Role-based (admin/user) with separate admin auth gate</td></tr>
+    <tr><td>Brute Force</td><td>Account lockout after 5 failed attempts (15 min)</td></tr>
+    <tr><td>Audit Logging</td><td>All security-relevant actions logged with timestamps and IPs</td></tr>
+    <tr><td>Security Headers</td><td>X-Frame-Options, X-Content-Type-Options, CSP via .htaccess</td></tr>
+    <tr><td>Directory Protection</td><td>Config, includes, and SQL directories blocked via .htaccess</td></tr>
+</table>
+
+<div class="danger-box">
+    <strong>Production Checklist:</strong>
+    <ul style="margin-top: 8px;">
+        <li>Change the default admin password immediately</li>
+        <li>Change the database password in both MariaDB and config/database.php</li>
+        <li>Delete setup.php after initial configuration</li>
+        <li>Set up regular database backups</li>
+        <li>Enable HTTPS if the system will be accessible over a network</li>
+        <li>Review and restrict Windows Firewall rules</li>
+        <li>Keep XAMPP/PHP updated for security patches</li>
+    </ul>
+</div>
+
+<h3>File Structure Reference</h3>
+<pre><code>C:\xampp\htdocs\SOC-Reporting\
+    index.php               Main entry point & router
+    setup.php               Database setup (DELETE after use!)
+    .htaccess               Apache security configuration
+    config/
+        app.php             Application settings
+        database.php        Database credentials
+    includes/
+        auth.php            Authentication & CSRF
+        db.php              Database helper class
+        helpers.php         Utility functions
+        session.php         Session management
+    pages/                  All page templates
+        admin/              Admin panel pages
+    api/                    API endpoints
+    assets/
+        css/style.css       Dark SOC theme
+        js/                 JavaScript files
+    sql/
+        system.sql          System database schema
+        machine_template.sql Machine database template</code></pre>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+    <p>SOC Reporting System v1.0.0 | Installation Guide</p>
+    <p>This document is classified for internal use only.</p>
+</div>
+
+</body>
+</html>

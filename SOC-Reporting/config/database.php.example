@@ -1,0 +1,33 @@
+<?php
+/**
+ * SOC Reporting System - Database Configuration
+ *
+ * Copy this file to database.php and update the credentials
+ * to match your MySQL/MariaDB setup.
+ *
+ * The system uses 5 databases: 1 system + 4 machine-specific.
+ */
+
+define('DB_HOST', 'localhost');
+define('DB_PORT', '3306');
+define('DB_USER', 'your_db_user');
+define('DB_PASS', 'your_db_password');
+define('DB_CHARSET', 'utf8mb4');
+
+// Database names
+define('DB_SYSTEM', 'soc_system');
+define('DB_MACHINE_PREFIX', 'soc_machine_');
+
+// Machine database names (1-4)
+define('DB_MACHINE_1', DB_MACHINE_PREFIX . '1');
+define('DB_MACHINE_2', DB_MACHINE_PREFIX . '2');
+define('DB_MACHINE_3', DB_MACHINE_PREFIX . '3');
+define('DB_MACHINE_4', DB_MACHINE_PREFIX . '4');
+
+// PDO options
+define('DB_OPTIONS', serialize([
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+    (defined('Pdo\Mysql::ATTR_INIT_COMMAND') ? Pdo\Mysql::ATTR_INIT_COMMAND : 1002) => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
+]));

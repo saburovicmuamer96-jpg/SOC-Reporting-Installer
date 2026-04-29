@@ -1,0 +1,25 @@
+# Database credentials (use database.php.example as template)
+SOC-Reporting/config/database.php
+SOC-Reporting/config/database.php.backup
+
+# Cache and logs
+SOC-Reporting/cache/*
+!SOC-Reporting/cache/.gitkeep
+SOC-Reporting/logs/*
+!SOC-Reporting/logs/.gitkeep
+
+# Unrelated files (Instagram bot artifacts)
+SOC-Reporting/plan.md
+SOC-Reporting/reel_generator_remote.py
+SOC-Reporting/Gemini
+SOC-Reporting/built-in
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
